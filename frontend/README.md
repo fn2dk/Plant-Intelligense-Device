@@ -1,16 +1,6 @@
 # Frontend
 
-Next.js upload UI for Plant Intelligense Device.
+Web and mobile interface for Plant Intelligence Device.
 
-## Start
-
-```bash
-npm install
-npm run dev
-```
-
-Then open:
-
-```text
-http://localhost:3000
-```
+## Setup
+TBD

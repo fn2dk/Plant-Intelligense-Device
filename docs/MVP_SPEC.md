@@ -1,36 +1,53 @@
-# MVP Specification
+# MVP Specification - Plant Intelligence Device
 
-## Version 0.1
+## 1. Overview
+The Plant Intelligence Device is an AI-powered system for monitoring and optimizing plant care.
 
-The first MVP must prove that one engineering PDF can become structured data.
+## 2. Core Features
 
-## Scope
+### 2.1 Plant Monitoring
+- Real-time sensor data collection (temperature, humidity, soil moisture, light)
+- Historical data tracking
+- Environmental condition analysis
 
-Included:
+### 2.2 AI-Powered Insights
+- Plant health assessment
+- Automated care recommendations
+- Predictive alerts for plant stress
 
-- Upload one P&ID PDF.
-- Classify pages.
-- Detect legend pages.
-- Extract text tags from embedded PDF text.
-- Create placeholder graph.
-- Expose API endpoints.
-- Prepare SQL schema.
+### 2.3 User Interface
+- Dashboard showing all plants
+- Individual plant detail views
+- Care recommendation feed
+- Sensor data visualization
 
-Excluded for now:
+## 3. Technical Stack
 
-- User login.
-- Production OCR.
-- Full OpenAI Vision integration.
-- Full symbol detection.
-- Full isolation calculations.
-- CMMS integration.
+### Backend
+- **Framework:** FastAPI (Python)
+- **Database:** PostgreSQL
+- **API Format:** REST/JSON
 
-## Acceptance criteria
+### Frontend
+- **Type:** Web/Mobile responsive
+- **Framework:** TBD
 
-- Backend starts with `uvicorn app.main:app --reload`.
-- `/api/documents/analyze` accepts a PDF.
-- API returns page classifications.
-- API returns detected tags.
-- `/api/graph/demo` returns nodes and edges.
-- `/api/isolation/demo/P-101A` returns a human-verification isolation proposal.
+### AI Engine
+- **Purpose:** Plant health mapping and analysis
+- **Model:** TBD
 
+## 4. Data Flow
+1. Sensors collect plant environmental data
+2. Data stored in database
+3. AI engine analyzes patterns
+4. Recommendations generated
+5. Frontend displays insights to user
+
+## 5. Success Criteria
+- System successfully monitors 1+ plants
+- AI provides accurate care recommendations
+- User can view plant status via frontend
+- System alerts user to critical conditions
+
+## 6. Timeline
+TBD

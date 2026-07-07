@@ -1,15 +1,12 @@
-# Backend
+# Backend - FastAPI
 
-Run locally:
+REST API built with FastAPI for Plant Intelligence Device.
 
+## Setup
 ```bash
-cd backend
-python -m venv .venv
-.venv\Scripts\activate  # Windows
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+python main.py
 ```
 
-Open API docs:
-
-http://127.0.0.1:8000/docs
+## Endpoints
+TBD
