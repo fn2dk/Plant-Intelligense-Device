@@ -11,9 +11,9 @@ class OcrResult:
 
 
 class OcrEngine:
-    """First text extraction service.
+    """Text extraction service.
 
-    v0.2 uses embedded PDF text through pypdf.
+    v0.3 uses embedded PDF text through pypdf.
     Later versions will add PaddleOCR for scanned drawings.
     """
 

@@ -12,8 +12,7 @@ class StorageService:
         document_dir = self.base_dir / document_id
         document_dir.mkdir(parents=True, exist_ok=True)
 
-        suffix = Path(file.filename or "uploaded.pdf").suffix or ".pdf"
-        target_path = document_dir / f"source{suffix}"
+        target_path = document_dir / "source.pdf"
 
         with target_path.open("wb") as buffer:
             while chunk := await file.read(1024 * 1024):

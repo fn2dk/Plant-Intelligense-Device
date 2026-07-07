@@ -7,13 +7,13 @@ from app.api.analysis import router as analysis_router
 
 app = FastAPI(
     title="Engineering Intelligence Platform API",
-    version="0.2.0",
-    description="Backend foundation for Project Atlas.",
+    version="0.3.0",
+    description="Upload-ready backend for Plant Intelligense Device.",
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

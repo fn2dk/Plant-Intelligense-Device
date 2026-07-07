@@ -1,24 +1,25 @@
 # Plant Intelligense Device
 
-Engineering Intelligence Platform foundation.
+Engineering Intelligence Platform.
 
-This project is built as a flexible platform for understanding engineering diagrams, not as a simple PDF viewer.
+## v0.3 upload-ready milestone
 
-## Version 0.2 focus
+This version gives Anders a working local MVP where he can upload a PDF from the browser and receive a first structured analysis result.
 
-v0.2 introduces a first real PDF ingestion pipeline:
+## What works in v0.3
 
-- Upload PDF
-- Store document
-- Classify pages
-- Extract embedded PDF text
-- Detect likely legend pages
-- Extract engineering tags
-- Return a structured analysis result
+- FastAPI backend
+- Browser upload UI
+- PDF upload endpoint
+- Local document storage
+- Analysis endpoint
+- Embedded PDF text extraction
+- Page classification
+- Legend page detection
+- Engineering tag detection
+- Basic analysis result display in the frontend
 
-The first target is P&ID analysis. The architecture is prepared for electrical diagrams, SLDs, loop diagrams, IO diagrams and cable diagrams.
-
-## Local backend start
+## Start backend
 
 ```bash
 cd backend
@@ -28,12 +29,36 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-Open:
+Backend runs on:
+
+```text
+http://127.0.0.1:8000
+```
+
+API docs:
 
 ```text
 http://127.0.0.1:8000/docs
 ```
 
-## Core rule
+## Start frontend
 
-The drawing legend is the primary source of truth for project-specific symbols, line colours and line types.
+Open a new terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on:
+
+```text
+http://localhost:3000
+```
+
+Upload a P&ID PDF from the web page.
+
+## Important
+
+This is still deterministic v0.3 logic. It does not yet render drawing images or detect symbol coordinates. That comes in v0.4.

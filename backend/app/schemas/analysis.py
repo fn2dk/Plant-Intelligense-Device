@@ -23,9 +23,17 @@ class LegendItem(BaseModel):
     source: str = "legend_text"
 
 
+class AnalysisStats(BaseModel):
+    page_count: int
+    legend_page_count: int
+    component_count: int
+    extracted_character_count: int
+
+
 class AnalysisResponse(BaseModel):
     document_id: str
     status: str
+    stats: AnalysisStats
     page_classifications: list[PageClassification] = Field(default_factory=list)
     legend_items: list[LegendItem] = Field(default_factory=list)
     detected_components: list[DetectedComponent] = Field(default_factory=list)

@@ -1,8 +1,6 @@
 # Electrical Plugin
 
-Defines electrical diagram object types and future connection rules.
-
-Initial object groups:
+Initial electrical object groups:
 
 - Breaker
 - Fuse

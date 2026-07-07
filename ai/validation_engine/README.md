@@ -1,5 +1,5 @@
 # Validation Engine
 
-Reserved service module for the Engineering Intelligence Platform.
+Reserved service module for future reasoning.
 
-This module is intentionally separated so P&ID, SLD and electrical diagram logic can evolve without rewriting the core API.
+v0.3 does not yet calculate connections, graph edges or isolation logic.

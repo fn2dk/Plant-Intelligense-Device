@@ -1,16 +1,16 @@
 # Frontend
 
-Planned frontend stack:
+Next.js upload UI for Plant Intelligense Device.
 
-- Next.js
-- React
-- PDF.js
-- SVG or Canvas overlays
-- Component side panels
-- Engineering graph explorer
+## Start
 
-First screen:
+```bash
+npm install
+npm run dev
+```
 
-1. Upload PDF.
-2. Show analysis result.
-3. List detected pages and components.
+Then open:
+
+```text
+http://localhost:3000
+```

@@ -23,6 +23,11 @@ KNOWN_LEGEND_TERMS = [
     "branch current",
     "measuring line",
     "air",
+    "cable",
+    "terminal",
+    "breaker",
+    "fuse",
+    "relay",
 ]
 
 
@@ -49,9 +54,8 @@ class LegendEngine:
                         source="deterministic_legend_keyword",
                     ))
 
-        # Deduplicate by name/page
         unique: dict[tuple[str, int], LegendItem] = {}
         for item in items:
             unique[(item.name, item.page_number)] = item
 
-        return list(unique.values())
+        return sorted(unique.values(), key=lambda item: (item.page_number, item.name))

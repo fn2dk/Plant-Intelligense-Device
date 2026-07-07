@@ -10,6 +10,7 @@ TAG_TYPE_PATTERNS: list[tuple[str, str]] = [
     (r"\bBV-?\d{2,4}\b", "ball_valve"),
     (r"\bGBV-?\d{2,4}\b", "gate_or_globe_valve"),
     (r"\bCV-?\d{2,4}\b", "check_valve"),
+    (r"\bDV-?\d{2,4}\b", "drain_valve"),
     (r"\bPI-?\d{2,4}\b", "pressure_indicator"),
     (r"\bPIT-?\d{2,4}\b", "pressure_transmitter"),
     (r"\bFIT-?\d{2,4}\b", "flow_transmitter"),
@@ -21,15 +22,15 @@ TAG_TYPE_PATTERNS: list[tuple[str, str]] = [
     (r"\bF-?\d{2,4}[A-Z]?\b", "filter"),
     (r"\bRO-?\d{2,4}\b", "reverse_osmosis_unit"),
     (r"\bUV-?\d{2,4}\b", "uv_unit"),
+    (r"\bQF-?\d{2,4}\b", "breaker"),
+    (r"\bK-?\d{2,4}\b", "relay_or_contactor"),
+    (r"\bX-?\d{1,4}\b", "terminal_strip"),
+    (r"\bM-?\d{2,4}\b", "motor"),
 ]
 
 
 class SymbolEngine:
-    """First-pass component detector based on engineering tag patterns.
-
-    v0.2 detects tags from extracted text. Later versions will connect these
-    tags to symbol coordinates and drawing geometry.
-    """
+    """First-pass component detector based on engineering tag patterns."""
 
     def detect_components(
         self,
@@ -51,7 +52,6 @@ class SymbolEngine:
                         source="deterministic_tag_pattern",
                     ))
 
-        # Deduplicate: keep first occurrence
         unique: dict[str, DetectedComponent] = {}
         for component in components:
             unique.setdefault(component.tag, component)
