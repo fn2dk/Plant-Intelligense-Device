@@ -1,39 +1,68 @@
 # Engineering Intelligence Platform
 
-Working repository name: Plant-Intelligense-Device-
-Internal project name: Atlas
+Working product name: **Plant Intelligense Device**  
+Architecture name: **Project Atlas**
 
-This project is a flexible Engineering Diagram Intelligence Platform. It is designed to ingest technical documents such as P&IDs, SLDs, electrical schematics, loop diagrams, cable diagrams and component lists, then convert them into an Engineering Knowledge Graph.
+This repository contains the foundation for a flexible Engineering Diagram Intelligence Platform.
 
-The first MVP focuses on one uploaded P&ID PDF and proves the core pipeline:
-
-Document ingestion -> Page classification -> Legend extraction -> OCR -> Symbol detection -> Connection tracing -> Graph generation -> Interactive overlay -> Engineering actions.
+The platform is not a PDF viewer. It converts engineering documents into structured objects, relationships, and a searchable Engineering Knowledge Graph.
 
 ## First MVP
 
-The first target is a single-drawing P&ID intelligence demo.
+The first MVP is a single-drawing P&ID analysis pipeline:
 
-It must:
+1. Upload a PDF.
+2. Classify pages.
+3. Detect legend pages.
+4. Extract OCR text.
+5. Detect symbols and component tags.
+6. Store components with coordinates and confidence scores.
+7. Build basic relationships.
+8. Render clickable overlays.
+9. Prepare an AI-assisted isolation proposal.
 
-- Upload a PDF.
-- Render the PDF in the browser.
-- Classify pages as drawing, legend, component list or other.
-- Extract tags and text.
-- Create detected engineering objects.
-- Store coordinates and confidence scores.
-- Expose objects through an API.
-- Prepare the structure for isolation planning and Excel component register matching.
+## Long-term diagram profiles
 
-## Architecture
+- P&ID
+- SLD
+- Electrical schematics
+- Control diagrams
+- IO diagrams
+- Loop diagrams
+- Cable diagrams
+- Excel component registers
+- CMMS / maintenance systems
 
-- Backend: Python FastAPI
-- Frontend: Next.js / React
-- Database: PostgreSQL / Supabase-compatible SQL
-- PDF rendering: PDF.js in frontend, PyMuPDF in backend
-- OCR: PaddleOCR later, simple OCR abstraction now
-- AI/Vision: pluggable provider later
-- Graph: relational MVP now, Neo4j-ready model later
+## Safety principle
 
-## Safety
+AI-generated isolation plans are proposals only. A qualified person must verify them before operational use.
 
-Any generated isolation plan is an engineering proposal only and must be verified by a qualified human before operational use.
+## Repository layout
+
+```text
+backend/       FastAPI backend and API services
+frontend/      React/Next.js frontend foundation
+ai/            AI and computer-vision engines
+plugins/       Diagram profiles and rule sets
+database/      PostgreSQL schema and migrations
+docs/          Architecture, requirements and roadmap
+tests/         System-level tests
+datasets/      Test documents and sample outputs
+examples/      Example payloads and expected results
+```
+
+## Local backend start
+
+```bash
+cd backend
+python -m venv .venv
+.venv\Scripts\activate  # Windows
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000/docs
+```

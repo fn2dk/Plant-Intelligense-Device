@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import router
+from app.api.health import router as health_router
+from app.api.documents import router as documents_router
+from app.api.analysis import router as analysis_router
 
 app = FastAPI(
     title="Engineering Intelligence Platform API",
     version="0.1.0",
-    description="AI-ready backend for engineering diagram intelligence.",
+    description="Backend foundation for Project Atlas.",
 )
 
 app.add_middleware(
@@ -17,8 +19,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(router, prefix="/api")
-
-@app.get("/")
-def root():
-    return {"status": "ok", "service": "Engineering Intelligence Platform API"}
+app.include_router(health_router, prefix="/health", tags=["health"])
+app.include_router(documents_router, prefix="/documents", tags=["documents"])
+app.include_router(analysis_router, prefix="/analysis", tags=["analysis"])

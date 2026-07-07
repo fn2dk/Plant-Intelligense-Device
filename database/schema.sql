@@ -1,68 +1,73 @@
--- Engineering Intelligence Platform MVP schema
-
-create table if not exists projects (
-    id uuid primary key default gen_random_uuid(),
-    name text not null,
-    created_at timestamptz not null default now()
-);
+-- Engineering Intelligence Platform initial schema
 
 create table if not exists documents (
-    id uuid primary key default gen_random_uuid(),
-    project_id uuid references projects(id),
+    id uuid primary key,
     filename text not null,
     document_type text,
     revision text,
-    created_at timestamptz not null default now()
+    uploaded_at timestamptz default now()
 );
 
-create table if not exists document_pages (
-    id uuid primary key default gen_random_uuid(),
+create table if not exists pages (
+    id uuid primary key,
     document_id uuid references documents(id),
-    page_number int not null,
+    page_number integer not null,
     page_type text not null,
-    width numeric,
-    height numeric,
-    confidence numeric
+    confidence numeric not null default 0,
+    metadata jsonb not null default '{}'::jsonb
 );
 
-create table if not exists engineering_objects (
-    id uuid primary key default gen_random_uuid(),
-    project_id uuid references projects(id),
+create table if not exists symbols (
+    id uuid primary key,
     document_id uuid references documents(id),
-    page_number int,
-    tag text,
-    object_type text not null,
-    source_profile text not null default 'pid',
-    x numeric,
-    y numeric,
-    width numeric,
-    height numeric,
-    confidence numeric,
-    created_at timestamptz not null default now()
+    page_number integer,
+    symbol_type text not null,
+    label text,
+    bbox jsonb,
+    source text,
+    confidence numeric not null default 0
 );
 
-create table if not exists engineering_relationships (
-    id uuid primary key default gen_random_uuid(),
-    project_id uuid references projects(id),
-    from_object_id uuid references engineering_objects(id),
-    to_object_id uuid references engineering_objects(id),
+create table if not exists components (
+    id uuid primary key,
+    document_id uuid references documents(id),
+    tag text,
+    component_type text not null,
+    page_number integer,
+    bbox jsonb,
+    properties jsonb not null default '{}'::jsonb,
+    confidence numeric not null default 0,
+    source text
+);
+
+create table if not exists relationships (
+    id uuid primary key,
+    source_component_id uuid references components(id),
+    target_component_id uuid references components(id),
     relationship_type text not null,
-    confidence numeric,
-    created_at timestamptz not null default now()
+    properties jsonb not null default '{}'::jsonb,
+    confidence numeric not null default 0,
+    source text
 );
 
 create table if not exists component_register_items (
-    id uuid primary key default gen_random_uuid(),
-    project_id uuid references projects(id),
-    source_file text,
-    source_sheet text,
-    source_row int,
+    id uuid primary key,
+    external_id text,
     tag text,
     description text,
-    equipment_type text,
+    component_type text,
     system text,
     location text,
-    maintenance_id text,
-    raw_data jsonb,
-    created_at timestamptz not null default now()
+    source_file text,
+    source_row integer,
+    properties jsonb not null default '{}'::jsonb
+);
+
+create table if not exists component_matches (
+    id uuid primary key,
+    component_id uuid references components(id),
+    register_item_id uuid references component_register_items(id),
+    match_status text not null,
+    confidence numeric not null default 0,
+    reviewed boolean not null default false
 );

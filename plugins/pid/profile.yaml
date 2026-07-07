@@ -1,0 +1,21 @@
+profile_id: pid
+name: P&ID profile
+object_types:
+  - pump
+  - valve
+  - tank
+  - vessel
+  - filter
+  - instrument
+  - pipe
+  - drain
+  - vent
+relationships:
+  - CONNECTED_TO
+  - FLOWS_TO
+  - MEASURES
+  - CONTROLS
+engineering_actions:
+  - trace_flow
+  - generate_isolation_plan
+  - find_connected_instruments

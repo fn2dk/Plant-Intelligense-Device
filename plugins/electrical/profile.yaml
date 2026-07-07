@@ -1,0 +1,24 @@
+profile_id: electrical
+name: Electrical diagram profile
+object_types:
+  - breaker
+  - fuse
+  - relay
+  - contactor
+  - terminal
+  - cable
+  - motor
+  - panel
+  - plc_input
+  - plc_output
+relationships:
+  - FEEDS
+  - CONNECTS_TO
+  - PROTECTS
+  - CONTROLS
+  - TERMINATES_AT
+engineering_actions:
+  - trace_feeder
+  - generate_electrical_isolation_plan
+  - find_terminals
+  - find_power_source
