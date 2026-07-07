@@ -7,7 +7,7 @@ from app.api.analysis import router as analysis_router
 
 app = FastAPI(
     title="Engineering Intelligence Platform API",
-    version="0.1.0",
+    version="0.2.0",
     description="Backend foundation for Project Atlas.",
 )
 

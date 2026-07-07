@@ -1,10 +1,5 @@
 # Validation Engine
 
-Finds inconsistencies across sources.
+Reserved service module for the Engineering Intelligence Platform.
 
-Examples:
-
-- tag exists in component list but not on drawing
-- motor exists on P&ID but no electrical feeder is found
-- two documents disagree on revision or tag name
-- low confidence relationship requires review
+This module is intentionally separated so P&ID, SLD and electrical diagram logic can evolve without rewriting the core API.

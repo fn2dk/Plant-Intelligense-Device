@@ -1,18 +1,31 @@
+from dataclasses import dataclass
 from pathlib import Path
 
 from pypdf import PdfReader
 
 
-class OcrEngine:
-    """Extracts text from engineering documents.
+@dataclass
+class OcrResult:
+    page_text: dict[int, str]
+    full_text: str
 
-    Current implementation uses embedded PDF text through pypdf. Later versions
-    will add PaddleOCR for rasterized drawings and technical tag recognition.
+
+class OcrEngine:
+    """First text extraction service.
+
+    v0.2 uses embedded PDF text through pypdf.
+    Later versions will add PaddleOCR for scanned drawings.
     """
 
-    def extract_text(self, pdf_path: Path) -> dict[int, str]:
-        reader = PdfReader(str(pdf_path))
-        return {
-            index: page.extract_text() or ""
-            for index, page in enumerate(reader.pages, start=1)
-        }
+    def extract_text(self, document_path: Path) -> OcrResult:
+        reader = PdfReader(str(document_path))
+        page_text: dict[int, str] = {}
+
+        for index, page in enumerate(reader.pages, start=1):
+            text = page.extract_text() or ""
+            page_text[index] = text
+
+        return OcrResult(
+            page_text=page_text,
+            full_text="\n\n".join(page_text.values()),
+        )

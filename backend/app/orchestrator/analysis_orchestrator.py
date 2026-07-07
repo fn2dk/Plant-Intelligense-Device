@@ -10,7 +10,7 @@ from ai.symbol_engine.service import SymbolEngine
 class AnalysisOrchestrator:
     """Coordinates the first MVP analysis pipeline.
 
-    The orchestrator deliberately calls specialised engines instead of using one
+    The orchestrator deliberately calls specialised services instead of using one
     large prompt. This keeps the architecture flexible for P&ID, SLD and
     electrical diagram profiles.
     """
@@ -32,19 +32,22 @@ class AnalysisOrchestrator:
             raise FileNotFoundError(f"No PDF found for document: {document_id}")
 
         document_path = pdf_files[0]
-        pages = self.document_engine.classify_pages(document_path)
-        legend = self.legend_engine.extract_legend(document_path, pages)
-        ocr_text = self.ocr_engine.extract_text(document_path)
-        components = self.symbol_engine.detect_components(document_path, legend, ocr_text)
+        ocr_result = self.ocr_engine.extract_text(document_path)
+        pages = self.document_engine.classify_pages(document_path, ocr_result.page_text)
+        legend_items = self.legend_engine.extract_legend(document_path, pages, ocr_result.page_text)
+        components = self.symbol_engine.detect_components(document_path, legend_items, ocr_result.page_text)
 
         return AnalysisResponse(
             document_id=document_id,
-            status="analysis_stub_completed",
+            status="analysis_v0_2_completed",
             page_classifications=pages,
+            legend_items=legend_items,
             detected_components=components,
+            extracted_text_preview=ocr_result.full_text[:2000],
             next_actions=[
-                "Replace stub engines with PDF rendering and OCR pipeline.",
-                "Add OpenCV line and symbol detection.",
-                "Create graph edges between connected components.",
+                "Add PDF page rendering for vision/image analysis.",
+                "Add OpenCV line colour and geometry detection.",
+                "Add symbol bounding boxes and click coordinates.",
+                "Build graph edges between detected components.",
             ],
         )

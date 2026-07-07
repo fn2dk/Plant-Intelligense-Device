@@ -1,5 +1,5 @@
 # Graph Engine
 
-Builds the Engineering Knowledge Graph.
+Reserved service module for the Engineering Intelligence Platform.
 
-The graph is the product's core asset. Documents, pages, symbols, components, connections, assets, work orders and maintenance history are represented as nodes and relationships.
+This module is intentionally separated so P&ID, SLD and electrical diagram logic can evolve without rewriting the core API.

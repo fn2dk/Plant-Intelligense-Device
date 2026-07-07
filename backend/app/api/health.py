@@ -4,5 +4,5 @@ router = APIRouter()
 
 
 @router.get("")
-def health_check() -> dict:
+def health_check() -> dict[str, str]:
     return {"status": "ok", "service": "engineering-intelligence-api"}

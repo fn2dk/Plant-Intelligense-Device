@@ -1,68 +1,39 @@
-# Engineering Intelligence Platform
+# Plant Intelligense Device
 
-Working product name: **Plant Intelligense Device**  
-Architecture name: **Project Atlas**
+Engineering Intelligence Platform foundation.
 
-This repository contains the foundation for a flexible Engineering Diagram Intelligence Platform.
+This project is built as a flexible platform for understanding engineering diagrams, not as a simple PDF viewer.
 
-The platform is not a PDF viewer. It converts engineering documents into structured objects, relationships, and a searchable Engineering Knowledge Graph.
+## Version 0.2 focus
 
-## First MVP
+v0.2 introduces a first real PDF ingestion pipeline:
 
-The first MVP is a single-drawing P&ID analysis pipeline:
+- Upload PDF
+- Store document
+- Classify pages
+- Extract embedded PDF text
+- Detect likely legend pages
+- Extract engineering tags
+- Return a structured analysis result
 
-1. Upload a PDF.
-2. Classify pages.
-3. Detect legend pages.
-4. Extract OCR text.
-5. Detect symbols and component tags.
-6. Store components with coordinates and confidence scores.
-7. Build basic relationships.
-8. Render clickable overlays.
-9. Prepare an AI-assisted isolation proposal.
-
-## Long-term diagram profiles
-
-- P&ID
-- SLD
-- Electrical schematics
-- Control diagrams
-- IO diagrams
-- Loop diagrams
-- Cable diagrams
-- Excel component registers
-- CMMS / maintenance systems
-
-## Safety principle
-
-AI-generated isolation plans are proposals only. A qualified person must verify them before operational use.
-
-## Repository layout
-
-```text
-backend/       FastAPI backend and API services
-frontend/      React/Next.js frontend foundation
-ai/            AI and computer-vision engines
-plugins/       Diagram profiles and rule sets
-database/      PostgreSQL schema and migrations
-docs/          Architecture, requirements and roadmap
-tests/         System-level tests
-datasets/      Test documents and sample outputs
-examples/      Example payloads and expected results
-```
+The first target is P&ID analysis. The architecture is prepared for electrical diagrams, SLDs, loop diagrams, IO diagrams and cable diagrams.
 
 ## Local backend start
 
 ```bash
 cd backend
 python -m venv .venv
-.venv\Scripts\activate  # Windows
+.venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-Then open:
+Open:
 
 ```text
 http://127.0.0.1:8000/docs
 ```
+
+## Core rule
+
+The drawing legend is the primary source of truth for project-specific symbols, line colours and line types.

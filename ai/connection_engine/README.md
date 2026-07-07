@@ -1,17 +1,5 @@
 # Connection Engine
 
-Responsible for tracing engineering connections between detected components.
+Reserved service module for the Engineering Intelligence Platform.
 
-P&ID examples:
-
-- pipe connects valve to pump
-- instrument line connects transmitter to controller
-- flow direction defines upstream and downstream
-
-Electrical examples:
-
-- breaker feeds cable
-- cable connects terminal to motor
-- relay contact controls coil or input
-
-The first implementation will use geometry and graph rules. Later versions will combine OpenCV, OCR, learned symbols and LLM validation.
+This module is intentionally separated so P&ID, SLD and electrical diagram logic can evolve without rewriting the core API.
